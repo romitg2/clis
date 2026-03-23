@@ -1,0 +1,22 @@
+{
+  "name": "clis",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "install-clis": "yarn build && yarn workspaces foreach -A run link-local",
+    "uninstall-clis": "yarn workspaces foreach -A run unlink-local"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "turbo": "^2",
+    "typescript": "^5"
+  },
+  "packageManager": "yarn@4.6.0"
+}
