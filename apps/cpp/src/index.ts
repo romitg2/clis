@@ -41,12 +41,12 @@ interface CreateOptions {
   open?: boolean;
 }
 
-function createContest(opts: CreateOptions): { success: boolean; path?: string; files?: string[]; error?: string } {
+function createContest(opts: CreateOptions): { success: boolean; path?: string; files?: string[]; error?: string; existed?: boolean } {
   const platformDir = opts.platform === "atcoder" ? "atcoder" : "codeforces";
   const contestPath = join(BASE_PATH, platformDir, opts.name);
 
   if (existsSync(contestPath)) {
-    return { success: false, error: `Folder already exists: ${contestPath}` };
+    return { success: true, path: contestPath, existed: true };
   }
 
   mkdirSync(contestPath, { recursive: true });
@@ -72,6 +72,10 @@ function createContest(opts: CreateOptions): { success: boolean; path?: string; 
   }
 
   return { success: true, path: contestPath, files };
+}
+
+function copyToClipboard(text: string) {
+  execSync(`echo "${text}" | pbcopy`);
 }
 
 function openFolder(path: string) {
@@ -114,8 +118,15 @@ program
       return;
     }
 
-    console.log(`\n✅ Created ${result.files!.length} files in ${result.path}`);
-    console.log(`   Files: ${result.files!.map((f) => f + ".cpp").join(", ")}`);
+    if (result.existed) {
+      console.log(`\n📂 Folder already exists, opening: ${result.path}`);
+    } else {
+      console.log(`\n✅ Created ${result.files!.length} files in ${result.path}`);
+      console.log(`   Files: ${result.files!.map((f) => f + ".cpp").join(", ")}`);
+    }
+
+    copyToClipboard(`cd ${result.path}`);
+    console.log(`📋 Copied to clipboard: cd ${result.path}`);
 
     openFolder(result.path!);
   });
@@ -145,8 +156,15 @@ program
       process.exit(1);
     }
 
-    console.log(`✅ Created ${result.files!.length} files in ${result.path}`);
-    console.log(`   Files: ${result.files!.map((f) => f + ".cpp").join(", ")}`);
+    if (result.existed) {
+      console.log(`📂 Folder already exists, opening: ${result.path}`);
+    } else {
+      console.log(`✅ Created ${result.files!.length} files in ${result.path}`);
+      console.log(`   Files: ${result.files!.map((f) => f + ".cpp").join(", ")}`);
+    }
+
+    copyToClipboard(`cd ${result.path}`);
+    console.log(`📋 Copied to clipboard: cd ${result.path}`);
 
     if (opts.open) {
       openFolder(result.path!);
