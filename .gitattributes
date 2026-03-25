@@ -1,0 +1,6 @@
+# GitHub Linguist overrides
+# Mark lock files as generated (excluded from language stats)
+yarn.lock linguist-generated
+
+# Ensure TypeScript is detected
+*.ts linguist-detectable
