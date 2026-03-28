@@ -319,6 +319,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"approve@workspace:apps/approve":
+  version: 0.0.0-use.local
+  resolution: "approve@workspace:apps/approve"
+  dependencies:
+    "@inquirer/prompts": "npm:^7"
+    "@types/node": "npm:^20"
+    commander: "npm:^12"
+    typescript: "npm:^5"
+  bin:
+    approve: ./dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "chardet@npm:^2.1.1":
   version: 2.1.1
   resolution: "chardet@npm:2.1.1"

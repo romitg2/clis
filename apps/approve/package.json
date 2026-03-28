@@ -1,0 +1,22 @@
+{
+  "name": "approve",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "link-local": "npm link",
+    "unlink-local": "npm unlink -g approve"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7",
+    "commander": "^12"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
