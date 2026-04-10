@@ -422,6 +422,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"printit@workspace:apps/printit":
+  version: 0.0.0-use.local
+  resolution: "printit@workspace:apps/printit"
+  dependencies:
+    "@inquirer/prompts": "npm:^7"
+    "@types/node": "npm:^20"
+    commander: "npm:^12"
+    typescript: "npm:^5"
+  bin:
+    printit: ./dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "safer-buffer@npm:>= 2.1.2 < 3.0.0":
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
